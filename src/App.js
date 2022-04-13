@@ -4,12 +4,14 @@ import "./App.css";
 import About from "./components/About/About";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
+import Checkout from "./components/Home/Checkout/Checkout";
 import Experts from "./components/Home/Experts/Experts";
 import Home from "./components/Home/Home";
 import Login from "./components/Home/Login/Login";
 import ServiceDetails from "./components/Home/Services/ServiceDetails";
 import Services from "./components/Home/Services/Services";
 import Signup from "./components/Home/Signup/Signup";
+import NotFound from "./components/NotFound/NotFound";
 
 function App() {
   return (
@@ -23,7 +25,9 @@ function App() {
         <Route path="/experts" element={<Experts />} />
         <Route path="/login" element={<Login />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
+        <Route path="/checkout" element={<Checkout />}></Route>
         <Route path="/service/:serviceId" element={<ServiceDetails />} />
+        <Route path="*" element={<NotFound />}></Route>
       </Routes>
       <Footer />
     </div>

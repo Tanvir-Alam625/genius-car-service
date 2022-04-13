@@ -3,8 +3,12 @@ import { Link } from "react-router-dom";
 import { MenuAlt4Icon } from "@heroicons/react/solid";
 import CustomLink from "./CustomLink";
 import logo from "../../images/logo.png";
+import auth from "../../firebase.init";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { signOut } from "firebase/auth";
 const Header = () => {
   const [open, setOpen] = useState(true);
+  const [user] = useAuthState(auth);
   return (
     <>
       <nav className="py-4 px-8 lg:px-20 lg:py-8 flex  bg-cyan-500 flex-col lg:flex-row justify-between w-full lg:items-center">
@@ -59,14 +63,18 @@ const Header = () => {
                 About
               </li>
             </CustomLink>
-            <CustomLink to="/login">
-              <li
-                onClick={() => setOpen(!open)}
-                className="mr-8 mb-4 lg:mb-0 text-xl font-semibold hover:text-white cursor-pointer  pl-3"
-              >
-                Login
-              </li>
-            </CustomLink>
+            {user ? (
+              <button onClick={() => signOut(auth)}>SignOut</button>
+            ) : (
+              <CustomLink to="/login">
+                <li
+                  onClick={() => setOpen(!open)}
+                  className="mr-8 mb-4 lg:mb-0 text-xl font-semibold hover:text-white cursor-pointer  pl-3"
+                >
+                  Login
+                </li>
+              </CustomLink>
+            )}
           </ul>
         </div>
         <MenuAlt4Icon
