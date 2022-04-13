@@ -1,25 +1,38 @@
 import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import GoogleIcon from "../../../images/google/google.png";
 import Login from "../Login/Login";
+import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import auth from "../../../firebase.init";
+import Spinner from "../../../images/loader/loading-98.gif";
+import "./Signup.css";
 //login function handler
 const Signup = () => {
-  // all use ref
-  const nameRef = useRef("");
-  const emailRef = useRef("");
-  const passwordRef = useRef("");
-  const confirmPasswordRef = useRef("");
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
+  const navigate = useNavigate();
   // error
-  const [error, setError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   // form submit function handler
+  // navigate
+  if (user) {
+    navigate("/");
+  }
   const handleSubmitForm = (event) => {
     event.preventDefault();
-    const name = nameRef.current.value;
-    const email = emailRef.current.value;
-    const password = passwordRef.current.value;
-    const cPassword = confirmPasswordRef.current.value;
+    const name = event.target.name.value;
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+    const cPassword = event.target.cPassword.value;
     console.log(name, email, password, cPassword);
+    if (password !== cPassword) {
+      setPasswordError("your password not match!");
+      return;
+    }
+    setPasswordError("");
+    createUserWithEmailAndPassword(email, password);
   };
+
   //@@@@@@@
   // jsx
   //@@@@@@@
@@ -34,7 +47,6 @@ const Signup = () => {
           Login genius car
         </h2>
         <input
-          ref={nameRef}
           type="text"
           name="name"
           id="name"
@@ -43,7 +55,6 @@ const Signup = () => {
           required
         />
         <input
-          ref={emailRef}
           type="email"
           name="email"
           id="email"
@@ -52,7 +63,6 @@ const Signup = () => {
           required
         />
         <input
-          ref={passwordRef}
           type="password"
           name="password"
           id="password"
@@ -60,10 +70,8 @@ const Signup = () => {
           className="py-2 border-2 rounded-md my-2 w-full px-2 "
           required
         />
-        <p className="text-red-500 text-xl">{error}</p>
         <br />
         <input
-          ref={confirmPasswordRef}
           type="password"
           name="cPassword"
           placeholder="Confirm Password"
@@ -71,7 +79,9 @@ const Signup = () => {
           className="py-2 border-2 rounded-md  mb-2  w-full px-2"
           required
         />
-        <p className="text-red-500">{error}</p>
+        <p className="text-red-500">
+          {error && error} {passwordError}
+        </p>
         <div className="link flex justify-start">
           <p>
             Already SignUp?
@@ -80,16 +90,19 @@ const Signup = () => {
               className="cursor-pointer text-cyan-600 font-semibold  "
               element={<Login />}
             >
-              LogIn
+              Login
             </Link>
           </p>
         </div>
-        <button className="p-2 text-center border-2 rounded-md capitalize text-xl text-white bg-cyan-600 hover:bg-cyan-400 duration-150 ease-in w-full mt-2">
-          Sign Up
+        <button
+          disabled={loading ? true : false}
+          className="p-2 text-center border-2  flex justify-center rounded-md capitalize text-xl text-white bg-cyan-600  duration-150 ease-in w-full mt-2"
+        >
+          {loading ? <div class="loader h-8"></div> : <p>Sign Up</p>}
         </button>
         <div className="sing-with-btn my-4 flex i w-full justify-around">
           <button
-            className="px-2 py-2 lg:px-6 lg:py-8 justify-center h-12 text-center border-2 rounded-md capitalize  text-xl mb-2 flex  items-center  text-gray-600 w-full"
+            className="px-2 py-2 lg:px-6 lg:py-8  justify-center h-12 text-center border-2 rounded-md capitalize  text-xl mb-2 flex  items-center  text-gray-600 w-full"
             title="Login with google"
           >
             <img

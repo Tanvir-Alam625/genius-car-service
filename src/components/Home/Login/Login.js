@@ -1,20 +1,32 @@
 import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { Link, useNavigate } from "react-router-dom";
+import auth from "../../../firebase.init";
 import GoogleIcon from "../../../images/google/google.png";
 import Signup from "../Signup/Signup";
+import "../Signup/Signup.css";
 //login function handler
 const Login = () => {
+  const [signInWithEmailAndPassword, user, loading, error] =
+    useSignInWithEmailAndPassword(auth);
+  const navigate = useNavigate();
   // all use
   const emailRef = useRef("");
   const passwordRef = useRef("");
-  // error state
-  const [error, setError] = useState("");
+  //navigate
+  if (user) {
+    navigate("/");
+  }
   // form submit function handler
   const handleSubmitFunction = (event) => {
     event.preventDefault();
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
     console.log(email, password);
+    if (error) {
+      return;
+    }
+    signInWithEmailAndPassword(email, password);
   };
 
   //@@@@@@@
@@ -39,7 +51,7 @@ const Login = () => {
           className="py-2 border-2 rounded-md my-2 w-full px-2 "
           required
         />
-        <p className="text-red-500 text-xl">{error}</p>
+
         <br />
         <input
           ref={passwordRef}
@@ -50,7 +62,7 @@ const Login = () => {
           className="py-2 border-2 rounded-md  mb-2  w-full px-2"
           required
         />
-        <p className="text-red-500">{error}</p>
+        <p className="text-red-500 text-xl">{error && error}</p>
         <div className="link flex justify-start">
           <p>
             New to Genius Car?
@@ -63,8 +75,8 @@ const Login = () => {
             </Link>
           </p>
         </div>
-        <button className="p-2 text-center border-2 rounded-md capitalize text-xl text-white bg-cyan-600 hover:bg-cyan-400 duration-150 ease-in w-full mt-2">
-          LogIn
+        <button className="p-2 text-center border-2 flex justify-center rounded-md capitalize text-xl text-white bg-cyan-600 hover:bg-cyan-400 duration-150 ease-in w-full mt-2">
+          {loading ? <div class="loader h-8"></div> : <p>LogIn</p>}
         </button>
         <div className="sing-with-btn my-4 flex i w-full justify-around">
           <button
