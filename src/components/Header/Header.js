@@ -7,6 +7,7 @@ import auth from "../../firebase.init";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { signOut } from "firebase/auth";
 import User from "../Home/User/User";
+import profileLogo from "../../images/icon/profileLogo.png";
 const Header = () => {
   const [open, setOpen] = useState(true);
   const [profile, setProfile] = useState(false);
@@ -68,22 +69,18 @@ const Header = () => {
             </CustomLink>
             <div className="user flex flex-col relative bg-cyan-500">
               {user ? (
-                <>
-                  <p
+                user.photoURL ? (
+                  <img src={user.photoURL} alt="userPhoto" />
+                ) : (
+                  <img
                     title={user.email}
                     onClick={() => setProfile(!profile)}
-                    className="mr-8 mb-4 lg:mb-0 text-xl text-gray-100 hover:text-white cursor-pointer font-semibold  pl-3"
-                  >
-                    {user.email.slice(0, 7) + "..."}
-                  </p>
-                  {profile && <User />}
-                  {/* <button
-                    onClick={() => signOut(auth)}
-                    className="p-2 absolute mt-12 text-center border-2 flex justify-center rounded-md capitalize text-xl text-gray-500 bg-gray-100 mt-2"
-                  >
-                    SignOut
-                  </button> */}
-                </>
+                    src={profileLogo}
+                    className=" cursor-pointer font-semibold h-[30px] "
+                    alt="profileLogo"
+                    style={{ borderRadius: "100%" }}
+                  />
+                )
               ) : (
                 <CustomLink to="/login">
                   <li
@@ -94,6 +91,7 @@ const Header = () => {
                   </li>
                 </CustomLink>
               )}
+              {user && profile && <User />}
             </div>
           </ul>
         </div>

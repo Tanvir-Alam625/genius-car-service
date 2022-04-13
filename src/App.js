@@ -12,6 +12,7 @@ import RequireAuth from "./components/Home/Services/RequireAuth";
 import ServiceDetails from "./components/Home/Services/ServiceDetails";
 import Services from "./components/Home/Services/Services";
 import Signup from "./components/Home/Signup/Signup";
+import User from "./components/Home/User/User";
 import NotFound from "./components/NotFound/NotFound";
 
 function App() {
@@ -34,6 +35,15 @@ function App() {
             </RequireAuth>
           }
         ></Route>
+        <Route
+          path="/user"
+          element={
+            <RequireAuth>
+              <User />
+            </RequireAuth>
+          }
+        ></Route>
+
         <Route path="/service/:serviceId" element={<ServiceDetails />} />
         <Route path="*" element={<NotFound />}></Route>
       </Routes>

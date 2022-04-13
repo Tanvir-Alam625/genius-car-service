@@ -7,11 +7,8 @@ const User = () => {
   return (
     <div className="absolute flex flex-col justify-between w-[300px] h-[500px] bg-cyan-500 p-4 right-2 top-16 rounded-md">
       <div className="info">
-        <h1 className="tex-3xl text-white my-6">
-          {user.displayName && user.displayName}
-        </h1>
         <h2 className="tex-1xl font-sans font-semibold text-white my-6">
-          Email: {user.email}
+          Email: {user?.email}
         </h2>
       </div>
       <button
