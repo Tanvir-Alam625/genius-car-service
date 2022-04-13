@@ -6,9 +6,12 @@ import logo from "../../images/logo.png";
 import auth from "../../firebase.init";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { signOut } from "firebase/auth";
+import User from "../Home/User/User";
 const Header = () => {
   const [open, setOpen] = useState(true);
+  const [profile, setProfile] = useState(false);
   const [user] = useAuthState(auth);
+  console.log(user);
   return (
     <>
       <nav className="py-4 px-8 lg:px-20 lg:py-8 flex  bg-cyan-500 flex-col lg:flex-row justify-between w-full lg:items-center">
@@ -63,18 +66,35 @@ const Header = () => {
                 About
               </li>
             </CustomLink>
-            {user ? (
-              <button onClick={() => signOut(auth)}>SignOut</button>
-            ) : (
-              <CustomLink to="/login">
-                <li
-                  onClick={() => setOpen(!open)}
-                  className="mr-8 mb-4 lg:mb-0 text-xl font-semibold hover:text-white cursor-pointer  pl-3"
-                >
-                  Login
-                </li>
-              </CustomLink>
-            )}
+            <div className="user flex flex-col relative bg-cyan-500">
+              {user ? (
+                <>
+                  <p
+                    title={user.email}
+                    onClick={() => setProfile(!profile)}
+                    className="mr-8 mb-4 lg:mb-0 text-xl text-gray-100 hover:text-white cursor-pointer font-semibold  pl-3"
+                  >
+                    {user.email.slice(0, 7) + "..."}
+                  </p>
+                  {profile && <User />}
+                  {/* <button
+                    onClick={() => signOut(auth)}
+                    className="p-2 absolute mt-12 text-center border-2 flex justify-center rounded-md capitalize text-xl text-gray-500 bg-gray-100 mt-2"
+                  >
+                    SignOut
+                  </button> */}
+                </>
+              ) : (
+                <CustomLink to="/login">
+                  <li
+                    onClick={() => setOpen(!open)}
+                    className="mr-8 mb-4 lg:mb-0 text-xl font-semibold hover:text-white cursor-pointer  pl-3"
+                  >
+                    Login
+                  </li>
+                </CustomLink>
+              )}
+            </div>
           </ul>
         </div>
         <MenuAlt4Icon
