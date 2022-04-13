@@ -22,7 +22,7 @@ const Header = () => {
             <CustomLink to="/">
               <li
                 onClick={() => setOpen(!open)}
-                className="mr-8 mb-4 lg:mb-0 text-xl hover:text-white cursor-pointer  pl-3"
+                className="mr-8 mb-4 lg:mb-0 text-xl hover:text-white font-semibold cursor-pointer  pl-3"
               >
                 Home
               </li>
@@ -30,7 +30,7 @@ const Header = () => {
             <CustomLink to="/services">
               <li
                 onClick={() => setOpen(!open)}
-                className="mr-8 mb-4 lg:mb-0 text-xl hover:text-white cursor-pointer  pl-3"
+                className="mr-8 mb-4 lg:mb-0 text-xl hover:text-white font-semibold cursor-pointer  pl-3"
               >
                 Services
               </li>
@@ -38,7 +38,7 @@ const Header = () => {
             <CustomLink to="/experts">
               <li
                 onClick={() => setOpen(!open)}
-                className="mr-8 mb-4 lg:mb-0 text-xl hover:text-white cursor-pointer  pl-3"
+                className="mr-8 mb-4 lg:mb-0 text-xl hover:text-white font-semibold cursor-pointer  pl-3"
               >
                 Experts
               </li>
@@ -46,7 +46,7 @@ const Header = () => {
             <CustomLink to="/contact">
               <li
                 onClick={() => setOpen(!open)}
-                className="mr-8 mb-4 lg:mb-0 text-xl hover:text-white cursor-pointer  pl-3"
+                className="mr-8 mb-4 lg:mb-0 text-xl hover:text-white font-semibold cursor-pointer  pl-3"
               >
                 Contact
               </li>
@@ -54,24 +54,24 @@ const Header = () => {
             <CustomLink to="/about">
               <li
                 onClick={() => setOpen(!open)}
-                className="mr-8 mb-4 lg:mb-0 text-xl hover:text-white cursor-pointer  pl-3"
+                className="mr-8 mb-4 lg:mb-0 text-xl hover:text-white cursor-pointer font-semibold  pl-3"
               >
                 About
               </li>
             </CustomLink>
-            <CustomLink to="/signup">
+            <CustomLink to="/login">
               <li
                 onClick={() => setOpen(!open)}
-                className="mr-8 mb-4 lg:mb-0 text-xl hover:text-white cursor-pointer  pl-3"
+                className="mr-8 mb-4 lg:mb-0 text-xl font-semibold hover:text-white cursor-pointer  pl-3"
               >
-                SignUp
+                Login
               </li>
             </CustomLink>
           </ul>
         </div>
         <MenuAlt4Icon
           onClick={() => setOpen(!open)}
-          className=" block lg:hidden absolute right-2 md:right-8 top-2 md:top-6 h-8 w-8 text-teal-300 cursor-pointer border rounded"
+          className=" block lg:hidden absolute right-2 md:right-8 font-semibold  top-2 md:top-6 h-8 w-8 text-teal-300 cursor-pointer border rounded"
         />
       </nav>
     </>

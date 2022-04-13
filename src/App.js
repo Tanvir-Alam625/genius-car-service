@@ -6,6 +6,8 @@ import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import Experts from "./components/Home/Experts/Experts";
 import Home from "./components/Home/Home";
+import Login from "./components/Home/Login/Login";
+import ServiceDetails from "./components/Home/Services/ServiceDetails";
 import Services from "./components/Home/Services/Services";
 
 function App() {
@@ -18,6 +20,8 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/services" element={<Services />} />
         <Route path="/experts" element={<Experts />} />
+        <Route path="/login" element={<Login />}></Route>
+        <Route path="/service/:serviceId" element={<ServiceDetails />} />
       </Routes>
       <Footer />
     </div>
