@@ -15,7 +15,7 @@ const Login = () => {
   return (
     <div className="flex flex-col  items-center  my-8 md:my-12">
       {/* form section  */}
-      <form className="w-1/3 mb-8 mt-8 border-2 shadow rounded-md px-2 md:px-8 py-4">
+      <form className="md:w-2/3  lg:w-1/3 w-full mb-8 mt-8 border-2 shadow rounded-md px-2 md:px-8 py-4">
         <h2 className="text-4xl mb-4 font-bold font-sans text-center text-cyan-300 capitalize">
           Login genius car
         </h2>
