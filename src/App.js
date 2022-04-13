@@ -8,6 +8,7 @@ import Checkout from "./components/Home/Checkout/Checkout";
 import Experts from "./components/Home/Experts/Experts";
 import Home from "./components/Home/Home";
 import Login from "./components/Home/Login/Login";
+import RequireAuth from "./components/Home/Services/RequireAuth";
 import ServiceDetails from "./components/Home/Services/ServiceDetails";
 import Services from "./components/Home/Services/Services";
 import Signup from "./components/Home/Signup/Signup";
@@ -25,7 +26,14 @@ function App() {
         <Route path="/experts" element={<Experts />} />
         <Route path="/login" element={<Login />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
-        <Route path="/checkout" element={<Checkout />}></Route>
+        <Route
+          path="/checkout"
+          element={
+            <RequireAuth>
+              <Checkout />
+            </RequireAuth>
+          }
+        ></Route>
         <Route path="/service/:serviceId" element={<ServiceDetails />} />
         <Route path="*" element={<NotFound />}></Route>
       </Routes>

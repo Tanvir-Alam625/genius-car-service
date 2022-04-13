@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import GoogleIcon from "../../../images/google/google.png";
 import Login from "../Login/Login";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
@@ -11,12 +11,14 @@ const Signup = () => {
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   // error
   const [passwordError, setPasswordError] = useState("");
   // form submit function handler
   // navigate
   if (user) {
-    navigate("/");
+    navigate(from, { replace: true });
   }
   const handleSubmitForm = (event) => {
     event.preventDefault();
