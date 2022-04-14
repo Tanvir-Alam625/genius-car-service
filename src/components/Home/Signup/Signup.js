@@ -1,25 +1,34 @@
-import React, { useRef, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import GoogleIcon from "../../../images/google/google.png";
 import Login from "../Login/Login";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
-import Spinner from "../../../images/loader/loading-98.gif";
 import "./Signup.css";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 //login function handler
 const Signup = () => {
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
   const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
+  const google = new GoogleAuthProvider();
+  const handleGoogle = () => {
+    signInWithPopup(auth, google)
+      .then((result) => {
+        const user = result.user;
+        console.log(user.photoURL);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
   // error
   const [passwordError, setPasswordError] = useState("");
-  // form submit function handler
   // navigate
   if (user) {
-    navigate(from, { replace: true });
+    navigate("/home");
   }
+  // form submit function handler
   const handleSubmitForm = (event) => {
     event.preventDefault();
     const name = event.target.name.value;
@@ -41,71 +50,72 @@ const Signup = () => {
   return (
     <div className="flex flex-col  items-center mx-2  my-8 md:my-12">
       {/* form section  */}
-      <form
-        onSubmit={handleSubmitForm}
-        className="md:w-2/3  lg:w-1/3 w-full mb-8 mt-8 border-2 shadow rounded-md px-2 md:px-8 py-4"
-      >
-        <h2 className="text-4xl mb-4 font-bold font-sans text-center text-cyan-500 capitalize">
-          Login genius car
-        </h2>
-        <input
-          type="text"
-          name="name"
-          id="name"
-          placeholder="Your Full Name"
-          className="py-2 border-2 rounded-md my-2 w-full px-2 "
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          id="email"
-          placeholder="Email"
-          className="py-2 border-2 rounded-md my-2 w-full px-2 "
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          id="password"
-          placeholder="Password"
-          className="py-2 border-2 rounded-md my-2 w-full px-2 "
-          required
-        />
-        <br />
-        <input
-          type="password"
-          name="cPassword"
-          placeholder="Confirm Password"
-          id="cPassword"
-          className="py-2 border-2 rounded-md  mb-2  w-full px-2"
-          required
-        />
-        <p className="text-red-500">
-          {error && error} {passwordError}
-        </p>
-        <div className="link flex justify-start">
-          <p>
-            Already SignUp?
-            <Link
-              to="/login"
-              className="cursor-pointer text-cyan-600 font-semibold  "
-              element={<Login />}
-            >
-              Login
-            </Link>
+      <div className="md:w-2/3  lg:w-1/3 w-full mb-8 mt-8 border-2 shadow rounded-md px-2 md:px-8 py-4">
+        <form onSubmit={handleSubmitForm}>
+          <h2 className="text-4xl mb-4 font-bold font-sans text-center text-cyan-500 capitalize">
+            Login genius car
+          </h2>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Your Full Name"
+            className="py-2 border-2 rounded-md my-2 w-full px-2 "
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Email"
+            className="py-2 border-2 rounded-md my-2 w-full px-2 "
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Password"
+            className="py-2 border-2 rounded-md my-2 w-full px-2 "
+            required
+          />
+          <br />
+          <input
+            type="password"
+            name="cPassword"
+            placeholder="Confirm Password"
+            id="cPassword"
+            className="py-2 border-2 rounded-md  mb-2  w-full px-2"
+            required
+          />
+          <p className="text-red-500">
+            {error} {passwordError}
           </p>
-        </div>
-        <button
-          disabled={loading ? true : false}
-          className="p-2 text-center border-2  flex justify-center rounded-md capitalize text-xl text-white bg-cyan-600  duration-150 ease-in w-full mt-2"
-        >
-          {loading ? <div class="loader h-8"></div> : <p>Sign Up</p>}
-        </button>
+          <div className="link flex justify-start">
+            <p>
+              Already SignUp?
+              <Link
+                to="/login"
+                className="cursor-pointer text-cyan-600 font-semibold  "
+                element={<Login />}
+              >
+                Login
+              </Link>
+            </p>
+          </div>
+          <button
+            type="submit"
+            disabled={loading ? true : false}
+            className="p-2 text-center border-2  flex justify-center rounded-md capitalize text-xl text-white bg-cyan-600  duration-150 ease-in w-full mt-2"
+          >
+            {loading ? <div className="loader h-8"></div> : <p>Sign Up</p>}
+          </button>
+        </form>
         <div className="sing-with-btn my-4 flex i w-full justify-around">
           <button
             className="px-2 py-2 lg:px-6 lg:py-8  justify-center h-12 text-center border-2 rounded-md capitalize  text-xl mb-2 flex  items-center  text-gray-600 w-full"
             title="Login with google"
+            onClick={handleGoogle}
           >
             <img
               src={GoogleIcon}
@@ -115,7 +125,7 @@ const Signup = () => {
             signup with google
           </button>
         </div>
-      </form>
+      </div>
     </div>
   );
 };

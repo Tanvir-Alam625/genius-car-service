@@ -12,7 +12,6 @@ const Header = () => {
   const [open, setOpen] = useState(true);
   const [profile, setProfile] = useState(false);
   const [user] = useAuthState(auth);
-  console.log(user);
   return (
     <>
       <nav className="py-4 px-8 lg:px-20 lg:py-8 flex  bg-cyan-500 flex-col lg:flex-row justify-between w-full lg:items-center">
@@ -68,10 +67,8 @@ const Header = () => {
               </li>
             </CustomLink>
             <div className="user flex flex-col relative bg-cyan-500">
-              {user ? (
-                user.photoURL ? (
-                  <img src={user.photoURL} alt="userPhoto" />
-                ) : (
+              {user?.uid ? (
+                <div>
                   <img
                     title={user.email}
                     onClick={() => setProfile(!profile)}
@@ -80,7 +77,7 @@ const Header = () => {
                     alt="profileLogo"
                     style={{ borderRadius: "100%" }}
                   />
-                )
+                </div>
               ) : (
                 <CustomLink to="/login">
                   <li
@@ -91,7 +88,7 @@ const Header = () => {
                   </li>
                 </CustomLink>
               )}
-              {user && profile && <User />}
+              {user ? profile && <User /> : ""}
             </div>
           </ul>
         </div>
