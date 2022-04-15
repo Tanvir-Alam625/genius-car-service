@@ -8,6 +8,7 @@ import Checkout from "./components/Home/Checkout/Checkout";
 import Experts from "./components/Home/Experts/Experts";
 import Home from "./components/Home/Home";
 import Login from "./components/Home/Login/Login";
+import Reset from "./components/Home/Login/Reset";
 import RequireAuth from "./components/Home/Services/RequireAuth";
 import ServiceDetails from "./components/Home/Services/ServiceDetails";
 import Services from "./components/Home/Services/Services";
@@ -45,6 +46,7 @@ function App() {
         ></Route>
 
         <Route path="/service/:serviceId" element={<ServiceDetails />} />
+        <Route path="/reset" element={<Reset />}></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
       <Footer />

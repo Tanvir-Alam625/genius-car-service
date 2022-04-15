@@ -1,32 +1,30 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import GoogleIcon from "../../../images/google/google.png";
 import Login from "../Login/Login";
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import {
+  useCreateUserWithEmailAndPassword,
+  useSignInWithGoogle,
+} from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
 import "./Signup.css";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import SocialLogin from "../SocialLogin/SocialLogin";
+// import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 //login function handler
 const Signup = () => {
   const [createUserWithEmailAndPassword, user, loading, error] =
-    useCreateUserWithEmailAndPassword(auth);
+    useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
   const navigate = useNavigate();
-  const google = new GoogleAuthProvider();
-  const handleGoogle = () => {
-    signInWithPopup(auth, google)
-      .then((result) => {
-        const user = result.user;
-        console.log(user.photoURL);
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
-  };
-  // error
   const [passwordError, setPasswordError] = useState("");
-  // navigate
-  if (user) {
-    navigate("/home");
+  const [signInWithGoogle, userGoogle, loadingGoogle, errorGoogle] =
+    useSignInWithGoogle(auth);
+
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
+  //navigate
+  if (user || userGoogle) {
+    navigate(from, { replace: true });
   }
   // form submit function handler
   const handleSubmitForm = (event) => {
@@ -53,7 +51,7 @@ const Signup = () => {
       <div className="md:w-2/3  lg:w-1/3 w-full mb-8 mt-8 border-2 shadow rounded-md px-2 md:px-8 py-4">
         <form onSubmit={handleSubmitForm}>
           <h2 className="text-4xl mb-4 font-bold font-sans text-center text-cyan-500 capitalize">
-            Login genius car
+            Sign Up genius car
           </h2>
           <input
             type="text"
@@ -89,7 +87,7 @@ const Signup = () => {
             required
           />
           <p className="text-red-500">
-            {error} {passwordError}
+            {error} {passwordError} {errorGoogle}
           </p>
           <div className="link flex justify-start">
             <p>
@@ -113,9 +111,9 @@ const Signup = () => {
         </form>
         <div className="sing-with-btn my-4 flex i w-full justify-around">
           <button
+            onClick={() => signInWithGoogle()}
             className="px-2 py-2 lg:px-6 lg:py-8  justify-center h-12 text-center border-2 rounded-md capitalize  text-xl mb-2 flex  items-center  text-gray-600 w-full"
             title="Login with google"
-            onClick={handleGoogle}
           >
             <img
               src={GoogleIcon}

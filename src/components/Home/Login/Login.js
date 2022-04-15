@@ -1,37 +1,45 @@
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import React, { useRef, useState } from "react";
-import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import {
+  useSignInWithEmailAndPassword,
+  useSignInWithGoogle,
+} from "react-firebase-hooks/auth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../../firebase.init";
 import GoogleIcon from "../../../images/google/google.png";
 import Signup from "../Signup/Signup";
 import "../Signup/Signup.css";
+import SocialLogin from "../SocialLogin/SocialLogin";
 //login function handler
 const Login = () => {
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
+  //google sign in
+  const [signInWithGoogle, userGoogle, loadingGoogle, errorGoogle] =
+    useSignInWithGoogle(auth);
+
   const navigate = useNavigate();
   const location = useLocation();
   // all use
   const emailRef = useRef("");
   const passwordRef = useRef("");
-  const google = new GoogleAuthProvider();
+  // const google = new GoogleAuthProvider();
   const from = location.state?.from?.pathname || "/";
 
   //navigate
-  if (user) {
+  if (user || userGoogle) {
     navigate(from, { replace: true });
   }
-  const handleGoogle = () => {
-    signInWithPopup(auth, google)
-      .then((result) => {
-        const user = result.user;
-        console.log(user.photoURL);
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
-  };
+  // const handleGoogle = () => {
+  //   signInWithPopup(auth, google)
+  //     .then((result) => {
+  //       const user = result.user;
+  //       console.log(user.photoURL);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error.message);
+  //     });
+  // };
   // form submit function handler
   const handleSubmitFunction = (event) => {
     event.preventDefault();
@@ -52,7 +60,7 @@ const Login = () => {
       {/* form section  */}
       <div className="md:w-2/3  lg:w-1/3 w-full mb-8 mt-8 border-2 shadow rounded-md px-2 md:px-8 py-4">
         <form onSubmit={handleSubmitFunction}>
-          <h2 className="text-4xl mb-4 font-bold font-sans text-center text-cyan-300 capitalize">
+          <h2 className="text-4xl mb-4 font-bold font-sans text-center text-cyan-500 capitalize">
             Login genius car
           </h2>
           <input
@@ -95,18 +103,27 @@ const Login = () => {
             {loading ? <div className="loader h-8"></div> : <p>LogIn</p>}
           </button>
         </form>
+        <p className="text-xl">
+          Forget Password?{" "}
+          <span
+            className="text-cyan-500 cursor-pointer"
+            onClick={() => navigate("/reset")}
+          >
+            Reset Password
+          </span>
+        </p>
         <div className="sing-with-btn my-4 flex i w-full justify-around">
           <button
-            className="px-2 py-2 lg:px-6 lg:py-8 justify-center h-12 text-center border-2 rounded-md capitalize  text-xl mb-2 flex  items-center  text-gray-600 w-full"
+            onClick={() => signInWithGoogle()}
+            className="px-2 py-2 lg:px-6 lg:py-8  justify-center h-12 text-center border-2 rounded-md capitalize  text-xl mb-2 flex  items-center  text-gray-600 w-full"
             title="Login with google"
-            onClick={handleGoogle}
           >
             <img
               src={GoogleIcon}
               alt="google"
               className="w-8 mr-4 capitalize"
             />
-            Login with google
+            signup with google
           </button>
         </div>
       </div>
