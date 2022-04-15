@@ -9,7 +9,6 @@ import auth from "../../../firebase.init";
 import GoogleIcon from "../../../images/google/google.png";
 import Signup from "../Signup/Signup";
 import "../Signup/Signup.css";
-import SocialLogin from "../SocialLogin/SocialLogin";
 //login function handler
 const Login = () => {
   const [signInWithEmailAndPassword, user, loading, error] =
@@ -30,16 +29,6 @@ const Login = () => {
   if (user || userGoogle) {
     navigate(from, { replace: true });
   }
-  // const handleGoogle = () => {
-  //   signInWithPopup(auth, google)
-  //     .then((result) => {
-  //       const user = result.user;
-  //       console.log(user.photoURL);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error.message);
-  //     });
-  // };
   // form submit function handler
   const handleSubmitFunction = (event) => {
     event.preventDefault();

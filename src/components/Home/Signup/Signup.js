@@ -18,6 +18,7 @@ const Signup = () => {
   const [passwordError, setPasswordError] = useState("");
   const [signInWithGoogle, userGoogle, loadingGoogle, errorGoogle] =
     useSignInWithGoogle(auth);
+  const [condition, setCondition] = useState(false);
 
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -86,6 +87,23 @@ const Signup = () => {
             className="py-2 border-2 rounded-md  mb-2  w-full px-2"
             required
           />
+          <div className="condition flex justify-start items-center my-2">
+            <input
+              type="checkbox"
+              name="trams"
+              id="condition"
+              onClick={() => setCondition(!condition)}
+              className="mr-2"
+            />
+            <label
+              htmlFor="condition"
+              className={`text-sm ${
+                condition ? "text-cyan-500" : "text-red-400"
+              }`}
+            >
+              Accept Genius Car trams and condition
+            </label>
+          </div>
           <p className="text-red-500">
             {error} {passwordError} {errorGoogle}
           </p>
@@ -101,10 +119,16 @@ const Signup = () => {
               </Link>
             </p>
           </div>
+
           <button
             type="submit"
-            disabled={loading ? true : false}
-            className="p-2 text-center border-2  flex justify-center rounded-md capitalize text-xl text-white bg-cyan-600  duration-150 ease-in w-full mt-2"
+            // disabled={!condition}
+            disabled={loading || !condition ? true : false}
+            className={`p-2 text-center border-2 bg-cyan-600  flex justify-center rounded-md capitalize text-xl text-white   duration-150 ease-in w-full mt-2 ${
+              condition
+                ? "bg-cyan-600 cursor-pointer"
+                : "bg-gray-400 cursor-not-allowed"
+            }`}
           >
             {loading ? <div className="loader h-8"></div> : <p>Sign Up</p>}
           </button>
