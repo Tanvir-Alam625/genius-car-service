@@ -29,7 +29,7 @@ const Header = () => {
             <CustomLink to="/">
               <li
                 onClick={() => setOpen(!open)}
-                className="mr-8 mb-4 lg:mb-0 text-xl hover:text-white font-semibold cursor-pointer  pl-3"
+                className="mr-8 mb-4 lg:mb-0 text-xl  font-semibold cursor-pointer  pl-3 decoration-transparent"
               >
                 Home
               </li>

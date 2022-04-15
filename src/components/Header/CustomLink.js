@@ -7,7 +7,7 @@ const CustomLink = ({ children, to, ...props }) => {
   return (
     <div>
       <Link
-        className={`${match ? "text-white border-b-2" : "text-gray-200"}`}
+        className={`${match ? "text-white" : "text-gray-200"}`}
         to={to}
         {...props}
       >
