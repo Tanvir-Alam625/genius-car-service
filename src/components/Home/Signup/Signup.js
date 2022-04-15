@@ -5,11 +5,11 @@ import Login from "../Login/Login";
 import {
   useCreateUserWithEmailAndPassword,
   useSignInWithGoogle,
+  useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
 import "./Signup.css";
-import SocialLogin from "../SocialLogin/SocialLogin";
-// import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { async } from "@firebase/util";
 //login function handler
 const Signup = () => {
   const [createUserWithEmailAndPassword, user, loading, error] =
@@ -19,6 +19,8 @@ const Signup = () => {
   const [signInWithGoogle, userGoogle, loadingGoogle, errorGoogle] =
     useSignInWithGoogle(auth);
   const [condition, setCondition] = useState(false);
+  // const [displayName, setDisplayName] = useState("");
+  const [updateProfile, updatingName, errorName] = useUpdateProfile(auth);
 
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -27,20 +29,23 @@ const Signup = () => {
   if (user || userGoogle) {
     navigate(from, { replace: true });
   }
+  if (errorName) {
+    console.log(errorName.message);
+  }
   // form submit function handler
-  const handleSubmitForm = (event) => {
+  const handleSubmitForm = async (event) => {
     event.preventDefault();
-    const name = event.target.name.value;
+    const displayName = event.target.name.value;
     const email = event.target.email.value;
     const password = event.target.password.value;
     const cPassword = event.target.cPassword.value;
-    console.log(name, email, password, cPassword);
     if (password !== cPassword) {
       setPasswordError("your password not match!");
       return;
     }
     setPasswordError("");
     createUserWithEmailAndPassword(email, password);
+    await updateProfile({ displayName });
   };
 
   //@@@@@@@

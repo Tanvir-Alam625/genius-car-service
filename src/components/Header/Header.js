@@ -13,8 +13,8 @@ const Header = () => {
   const [profile, setProfile] = useState(false);
   const [user] = useAuthState(auth);
   return (
-    <>
-      <nav className="py-4 px-8 lg:px-20 lg:py-8 flex  bg-cyan-500 flex-col lg:flex-row justify-between w-full lg:items-center">
+    <header>
+      <nav className="py-4 px-8 lg:px-20 lg:py-6 flex  bg-cyan-500 flex-col lg:flex-row justify-between w-full lg:items-center">
         <div className="nv-logo">
           <Link to="/">
             <img src={logo} alt="logo" className="w-[100px] md:w-[200px]" />
@@ -68,7 +68,7 @@ const Header = () => {
             </CustomLink>
             <div className="user flex flex-col relative bg-cyan-500">
               {user?.uid ? (
-                <div>
+                <div className="flex justify-center">
                   <img
                     title={user.email}
                     onClick={() => setProfile(!profile)}
@@ -97,7 +97,7 @@ const Header = () => {
           className=" block lg:hidden absolute right-2 md:right-8 font-semibold  top-2 md:top-6 h-8 w-8 text-teal-300 cursor-pointer border rounded"
         />
       </nav>
-    </>
+    </header>
   );
 };
 
