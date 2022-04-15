@@ -10,6 +10,8 @@ import {
 import auth from "../../../firebase.init";
 import "./Signup.css";
 import { async } from "@firebase/util";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 //login function handler
 const Signup = () => {
   const [createUserWithEmailAndPassword, user, loading, error] =
@@ -45,6 +47,7 @@ const Signup = () => {
     }
     setPasswordError("");
     createUserWithEmailAndPassword(email, password);
+    toast("check Your email and verify your account");
     await updateProfile({ displayName });
   };
 
@@ -151,6 +154,7 @@ const Signup = () => {
             />
             signup with google
           </button>
+          <ToastContainer />
         </div>
       </div>
     </div>

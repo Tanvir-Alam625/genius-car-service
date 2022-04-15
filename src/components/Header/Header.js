@@ -88,7 +88,7 @@ const Header = () => {
                   </li>
                 </CustomLink>
               )}
-              {user ? profile && <User /> : ""}
+              {profile && <User />}
             </div>
           </ul>
         </div>
