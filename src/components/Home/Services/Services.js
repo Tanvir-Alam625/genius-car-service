@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import PageTitle from "../../../PageTitle/PageTitle";
 import Service from "./Service";
 
 const Services = () => {
@@ -15,6 +16,7 @@ const Services = () => {
 
   return (
     <div id="service">
+      <PageTitle title="Services" />
       <h2 className="text-5xl text-center font-semibold  text-cyan-500 mb-8 mt-12">
         Our Services
       </h2>

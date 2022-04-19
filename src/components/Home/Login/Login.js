@@ -1,12 +1,14 @@
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import {
   useSignInWithEmailAndPassword,
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
+import { Helmet } from "react-helmet-async";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../../firebase.init";
 import GoogleIcon from "../../../images/google/google.png";
+import PageTitle from "../../../PageTitle/PageTitle";
 import Signup from "../Signup/Signup";
 import "../Signup/Signup.css";
 //login function handler
@@ -16,12 +18,10 @@ const Login = () => {
   //google sign in
   const [signInWithGoogle, userGoogle, loadingGoogle, errorGoogle] =
     useSignInWithGoogle(auth);
+  const [myError, setMyError] = useState("");
 
   const navigate = useNavigate();
   const location = useLocation();
-  // all use
-  const emailRef = useRef("");
-  const passwordRef = useRef("");
   // const google = new GoogleAuthProvider();
   const from = location.state?.from?.pathname || "/";
 
@@ -32,20 +32,23 @@ const Login = () => {
   // form submit function handler
   const handleSubmitFunction = (event) => {
     event.preventDefault();
-    const email = emailRef.current.value;
-    const password = passwordRef.current.value;
+    // const email = emailRef.current.value;
+    // const password = passwordRef.current.value;
+    const email = event.target.email.value;
+    const password = event.target.password.value;
     console.log(email, password);
     if (error) {
+      setMyError(error.message);
       return;
     }
     signInWithEmailAndPassword(email, password);
   };
-
   //@@@@@@@
   // jsx
   //@@@@@@@
   return (
     <div className="flex flex-col  items-center  my-8 md:my-12">
+      <PageTitle title="Login" />
       {/* form section  */}
       <div className="md:w-2/3  lg:w-1/3 w-full mb-8 mt-8 border-2 shadow rounded-md px-2 md:px-8 py-4">
         <form onSubmit={handleSubmitFunction}>
@@ -53,7 +56,6 @@ const Login = () => {
             Login genius car
           </h2>
           <input
-            ref={emailRef}
             type="email"
             name="email"
             id="email"
@@ -64,7 +66,6 @@ const Login = () => {
 
           <br />
           <input
-            ref={passwordRef}
             type="password"
             name="password"
             placeholder="Password"
@@ -72,7 +73,7 @@ const Login = () => {
             className="py-2 border-2 rounded-md  mb-2  w-full px-2"
             required
           />
-          <p className="text-red-500 text-xl">{error && error}</p>
+          <p className="text-red-500 text-xl">{myError}</p>
           <div className="link flex justify-start">
             <p>
               New to Genius Car?

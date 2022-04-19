@@ -5,6 +5,7 @@ import expert3 from "../../../images/experts/expert-3.jpg";
 import expert4 from "../../../images/experts/expert-4.jpg";
 import expert5 from "../../../images/experts/expert-5.jpg";
 import expert6 from "../../../images/experts/expert-6.png";
+import PageTitle from "../../../PageTitle/PageTitle";
 import Expert from "./Expert";
 
 const Experts = () => {
@@ -19,6 +20,7 @@ const Experts = () => {
 
   return (
     <div>
+      <PageTitle title="Experts" />
       <h2 className="text-5xl text-center font-semibold text-cyan-500 mb-8 mt-12">
         Our Experts
       </h2>

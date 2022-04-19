@@ -17,6 +17,7 @@ import User from "./components/Home/User/User";
 import NotFound from "./components/NotFound/NotFound";
 
 function App() {
+  console.log(process.env);
   return (
     <div className="App">
       <Header />

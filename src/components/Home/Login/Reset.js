@@ -4,6 +4,7 @@ import { Navigate } from "react-router-dom";
 import auth from "../../../firebase.init";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import PageTitle from "../../../PageTitle/PageTitle";
 
 const Reset = () => {
   const emailRef = useRef("");
@@ -25,6 +26,7 @@ const Reset = () => {
 
   return (
     <div className="h-full w-full flex justify-center items-center my-12">
+      <PageTitle title="Reset Password" />
       <form
         onSubmit={handleResetPass}
         className="md:w-2/3  lg:w-1/3 w-full p-8  shadow  flex items-start flex-col"
@@ -42,11 +44,6 @@ const Reset = () => {
           required
         />
         <button
-          //   onClick={async (event) => {
-          //     event.preventDefault();
-          //     await sendPasswordResetEmail(email);
-          //     console.log("sent email");
-          //   }}
           type="submit"
           className="cursor-pointer text-white px-6 py-2 mt-6 rounded-md bg-cyan-600 font-semibold  "
         >

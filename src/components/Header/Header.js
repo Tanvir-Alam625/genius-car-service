@@ -10,7 +10,7 @@ import User from "../Home/User/User";
 import profileLogo from "../../images/icon/profileLogo.png";
 const Header = () => {
   const [open, setOpen] = useState(true);
-  const [profile, setProfile] = useState(false);
+  const [profile, setProfile] = useState(true);
   const [user] = useAuthState(auth);
   return (
     <header>
@@ -88,7 +88,7 @@ const Header = () => {
                   </li>
                 </CustomLink>
               )}
-              {profile && <User />}
+              {user && profile && <User />}
             </div>
           </ul>
         </div>

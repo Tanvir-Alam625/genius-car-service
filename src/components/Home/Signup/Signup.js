@@ -12,6 +12,7 @@ import "./Signup.css";
 import { async } from "@firebase/util";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import PageTitle from "../../../PageTitle/PageTitle";
 //login function handler
 const Signup = () => {
   const [createUserWithEmailAndPassword, user, loading, error] =
@@ -56,6 +57,7 @@ const Signup = () => {
   //@@@@@@@
   return (
     <div className="flex flex-col  items-center mx-2  my-8 md:my-12">
+      <PageTitle title="Signup" />
       {/* form section  */}
       <div className="md:w-2/3  lg:w-1/3 w-full mb-8 mt-8 border-2 shadow rounded-md px-2 md:px-8 py-4">
         <form onSubmit={handleSubmitForm}>
