@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const Service = ({ data }) => {
-  const { name, img, description, price, id } = data;
+  const { name, img, description, price, _id } = data;
   const navigate = useNavigate();
   return (
     <div className="border rounded-md  shadow">
@@ -17,7 +17,7 @@ const Service = ({ data }) => {
         <small className="text-gray-600 text-sm">{description}</small>
         <div className="btn">
           <button
-            onClick={() => navigate(`/service/${id}`)}
+            onClick={() => navigate(`/service/${_id}`)}
             className="border rounded my-2  px-8 py-2 shadow text-xl capitalize bg-cyan-500 text-gray-600 text-center"
           >
             get now
