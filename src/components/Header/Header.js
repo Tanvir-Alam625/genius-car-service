@@ -66,6 +66,26 @@ const Header = () => {
                 About
               </li>
             </CustomLink>
+            {user && (
+              <>
+                <CustomLink to="/add">
+                  <li
+                    onClick={() => setOpen(!open)}
+                    className="mr-8 mb-4 lg:mb-0 text-xl hover:text-white cursor-pointer font-semibold  pl-3"
+                  >
+                    Add Service
+                  </li>
+                </CustomLink>
+                <CustomLink to="/manage">
+                  <li
+                    onClick={() => setOpen(!open)}
+                    className="mr-8 mb-4 lg:mb-0 text-xl hover:text-white cursor-pointer font-semibold  pl-3"
+                  >
+                    Manage
+                  </li>
+                </CustomLink>
+              </>
+            )}
             <div className="user flex flex-col relative bg-cyan-500">
               {user?.uid ? (
                 <div className="flex justify-center">

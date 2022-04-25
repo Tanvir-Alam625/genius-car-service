@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { toast, ToastContainer } from "react-toastify";
 
 const AddService = () => {
   const { register, handleSubmit } = useForm();
@@ -16,6 +17,7 @@ const AddService = () => {
       .then((res) => res.json())
       .then((result) => {
         console.log(result);
+        toast("Service Data Added....!");
       });
   };
 
@@ -56,6 +58,7 @@ const AddService = () => {
           className=" border-2 rounded-md shadow py-2 px-2 text-xl cursor-pointer text-blue-500 font-semibold"
         />
       </form>
+      <ToastContainer />
     </div>
   );
 };

@@ -15,6 +15,7 @@ import ServiceDetails from "./components/Home/Services/ServiceDetails";
 import Services from "./components/Home/Services/Services";
 import Signup from "./components/Home/Signup/Signup";
 import User from "./components/Home/User/User";
+import Manage from "./components/Manage/Manage";
 import NotFound from "./components/NotFound/NotFound";
 
 function App() {
@@ -48,7 +49,23 @@ function App() {
 
         <Route path="/service/:serviceId" element={<ServiceDetails />} />
         <Route path="/reset" element={<Reset />}></Route>
-        <Route path="/add" element={<AddService />}></Route>
+        <Route
+          path="/add"
+          element={
+            <RequireAuth>
+              <AddService />
+            </RequireAuth>
+          }
+        ></Route>
+        <Route
+          path="/manage"
+          element={
+            <RequireAuth>
+              <Manage />
+            </RequireAuth>
+          }
+        ></Route>
+
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
       <Footer />
