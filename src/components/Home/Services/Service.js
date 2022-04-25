@@ -2,8 +2,9 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const Service = ({ data }) => {
-  const { name, img, description, price, _id } = data;
   const navigate = useNavigate();
+  const { name, img, description, price, _id } = data;
+
   return (
     <div className="border rounded-md  shadow">
       <img src={img} alt="service" className=" w-full rounded-t-md" />
