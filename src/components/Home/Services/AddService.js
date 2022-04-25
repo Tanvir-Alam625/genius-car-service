@@ -3,7 +3,21 @@ import { useForm } from "react-hook-form";
 
 const AddService = () => {
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    console.log(data);
+    const url = "http://localhost:5000/service";
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+      });
+  };
 
   return (
     <div className="flex justify-center min-h-screen w-full items-center flex-col px-2">
@@ -19,7 +33,7 @@ const AddService = () => {
           className="mb-2 border-2 rounded-md shadow py-2 px-2 text-xl"
           {...register("name", { required: true, maxLength: 20 })}
         />
-        <input
+        <textarea
           placeholder="Description"
           className="mb-2 py-2 px-2 border-2 rounded-md shadow text-xl"
           {...register("description")}
