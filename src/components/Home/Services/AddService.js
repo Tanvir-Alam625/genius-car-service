@@ -31,6 +31,12 @@ const AddService = () => {
           {...register("price")}
         />
         <input
+          placeholder="PhotoURL"
+          className="mb-2 border-2 rounded-md py-2 px-2 shadow text-xl"
+          type="text"
+          {...register("img")}
+        />
+        <input
           type="submit"
           value="Add Service"
           className=" border-2 rounded-md shadow py-2 px-2 text-xl cursor-pointer text-blue-500 font-semibold"
