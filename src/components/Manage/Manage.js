@@ -1,10 +1,12 @@
 import { PencilAltIcon, TrashIcon } from "@heroicons/react/solid";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import useServices from "../../hooks/useServices";
 
 const Manage = () => {
   const [services, setServices] = useServices();
+  const navigate = useNavigate();
   const handleDeleteBtn = (id) => {
     const Proceed = window.confirm("Are Your Sure.?");
     if (Proceed) {
@@ -20,6 +22,9 @@ const Manage = () => {
           setServices(remaining);
         });
     }
+  };
+  const handleUpdateBtn = (id) => {
+    navigate(`/update/${id}`);
   };
   return (
     <div className="w-full md:w-2/3 border-2 mx-auto p-2 md:p-4 rounded-md">
@@ -38,7 +43,7 @@ const Manage = () => {
           </div>
           <h5 className="font-semibold ">{service.name}</h5>
           <div className="mng-item">
-            <button>
+            <button onClick={() => handleUpdateBtn(service._id)}>
               <PencilAltIcon className="h-6 w-6 hover:text-green-500 mr-4" />
             </button>
             <button onClick={() => handleDeleteBtn(service._id)}>

@@ -1,14 +1,14 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
-
-const AddService = () => {
+const UpdateService = () => {
   const { register, handleSubmit } = useForm();
+  const { id } = useParams();
   const onSubmit = (data) => {
-    console.log(data);
-    const url = "http://localhost:5000/service";
+    const url = `http://localhost:5000/service/${id}`;
     fetch(url, {
-      method: "POST",
+      method: "PUT",
       headers: {
         "content-type": "application/json",
       },
@@ -16,20 +16,15 @@ const AddService = () => {
     })
       .then((res) => res.json())
       .then((result) => {
-        console.log(result);
-        toast("Service Data Added....!");
+        toast("One data Update successfully..!");
       });
   };
-
   return (
-    <div className="flex justify-center min-h-screen w-full items-center flex-col px-2">
-      <h2 className="text-4xl font-mono font-semibold my-6 text-blue-500 ">
-        Add Service Items
+    <div className="min-h-screen w-full md:w-2/3 lg:w-1/3 px-2 mx-auto flex flex-col justify-center items-center ">
+      <h2 className="capitalize text-5xl text-blue-500 text-center my-5">
+        Update Your item
       </h2>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col w-full  md:w-2/3 lg:w-1/3"
-      >
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col w-full ">
         <input
           placeholder="Name"
           className="mb-2 border-2 rounded-md shadow py-2 px-2 text-xl"
@@ -54,8 +49,8 @@ const AddService = () => {
         />
         <input
           type="submit"
-          value="Add Service"
-          className=" border-2 rounded-md shadow py-2 px-2 text-xl cursor-pointer  bg-blue-500 text-white hover:bg-blue-400 duration-200 ease-in-out font-semibold"
+          value="Update Service"
+          className=" border-2 rounded-md shadow py-2 px-2 text-xl cursor-pointer bg-blue-500 text-white hover:bg-blue-400 duration-200 ease-in-out font-semibold"
         />
       </form>
       <ToastContainer />
@@ -63,4 +58,4 @@ const AddService = () => {
   );
 };
 
-export default AddService;
+export default UpdateService;
