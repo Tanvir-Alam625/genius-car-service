@@ -21,7 +21,7 @@ const Header = () => {
           </Link>
         </div>
         <div
-          className={` absolute top-[50px] md:top-[70px] w-full lg:w-auto bg-cyan-500 py-6 px-3 lg:p-0 lg:static lg:mt-0 duration-300 ease-in z-30 ${
+          className={` absolute top-[50px] md:top-[70px] w-full lg:w-auto bg-cyan-500 py-6 px-3 lg:p-0 lg:static lg:mt-0 duration-100 ease-in z-30 ${
             open ? "left-[-100%]" : "left-[0px]"
           }`}
         >
@@ -29,7 +29,7 @@ const Header = () => {
             <CustomLink to="/">
               <li
                 onClick={() => setOpen(!open)}
-                className="mr-8 mb-4 lg:mb-0 text-xl  font-semibold cursor-pointer  pl-3 decoration-transparent"
+                className="mr-4 mb-4 lg:mb-0 text-xl  font-semibold cursor-pointer  pl-3 decoration-transparent"
               >
                 Home
               </li>
@@ -37,7 +37,7 @@ const Header = () => {
             <CustomLink to="/services">
               <li
                 onClick={() => setOpen(!open)}
-                className="mr-8 mb-4 lg:mb-0 text-xl hover:text-white font-semibold cursor-pointer  pl-3"
+                className="mr-4 mb-4 lg:mb-0 text-xl hover:text-white  cursor-pointer  pl-2"
               >
                 Services
               </li>
@@ -45,7 +45,7 @@ const Header = () => {
             <CustomLink to="/experts">
               <li
                 onClick={() => setOpen(!open)}
-                className="mr-8 mb-4 lg:mb-0 text-xl hover:text-white font-semibold cursor-pointer  pl-3"
+                className="mr-4 mb-4 lg:mb-0 text-xl hover:text-white  cursor-pointer  pl-2"
               >
                 Experts
               </li>
@@ -53,7 +53,7 @@ const Header = () => {
             <CustomLink to="/contact">
               <li
                 onClick={() => setOpen(!open)}
-                className="mr-8 mb-4 lg:mb-0 text-xl hover:text-white font-semibold cursor-pointer  pl-3"
+                className="mr-4 mb-4 lg:mb-0 text-xl hover:text-white cursor-pointer  pl-2"
               >
                 Contact
               </li>
@@ -61,7 +61,7 @@ const Header = () => {
             <CustomLink to="/about">
               <li
                 onClick={() => setOpen(!open)}
-                className="mr-8 mb-4 lg:mb-0 text-xl hover:text-white cursor-pointer font-semibold  pl-3"
+                className="mr-4 mb-4 lg:mb-0 text-xl hover:text-white cursor-pointer   pl-2"
               >
                 About
               </li>
@@ -71,7 +71,7 @@ const Header = () => {
                 <CustomLink to="/add">
                   <li
                     onClick={() => setOpen(!open)}
-                    className="mr-8 mb-4 lg:mb-0 text-xl hover:text-white cursor-pointer font-semibold  pl-3"
+                    className="mr-4 mb-4 lg:mb-0 text-xl hover:text-white cursor-pointer  pl-2"
                   >
                     Add Service
                   </li>
@@ -79,9 +79,17 @@ const Header = () => {
                 <CustomLink to="/manage">
                   <li
                     onClick={() => setOpen(!open)}
-                    className="mr-8 mb-4 lg:mb-0 text-xl hover:text-white cursor-pointer font-semibold  pl-3"
+                    className="mr-4 mb-4 lg:mb-0 text-xl hover:text-white cursor-pointer pl-2"
                   >
                     Manage
+                  </li>
+                </CustomLink>
+                <CustomLink to="/orderHistory">
+                  <li
+                    onClick={() => setOpen(!open)}
+                    className="mr-4 mb-4 lg:mb-0 text-xl hover:text-white cursor-pointer  pl-2"
+                  >
+                    Orders
                   </li>
                 </CustomLink>
               </>
@@ -102,7 +110,7 @@ const Header = () => {
                 <CustomLink to="/login">
                   <li
                     onClick={() => setOpen(!open)}
-                    className="mr-8 mb-4 lg:mb-0 text-xl font-semibold hover:text-white cursor-pointer  pl-3"
+                    className="mr-4 mb-4 lg:mb-0 text-xl font-semibold hover:text-white cursor-pointer  pl-3"
                   >
                     Login
                   </li>

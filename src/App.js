@@ -19,6 +19,7 @@ import User from "./components/Home/User/User";
 import Manage from "./components/Manage/Manage";
 import UpdateService from "./components/Manage/UpdateService";
 import NotFound from "./components/NotFound/NotFound";
+import OrdersHistory from "./components/OrdersHistory/OrdersHistory";
 
 function App() {
   return (
@@ -64,6 +65,14 @@ function App() {
           element={
             <RequireAuth>
               <Manage />
+            </RequireAuth>
+          }
+        ></Route>
+        <Route
+          path="/orderHistory"
+          element={
+            <RequireAuth>
+              <OrdersHistory />
             </RequireAuth>
           }
         ></Route>
