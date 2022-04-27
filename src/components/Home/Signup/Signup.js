@@ -49,7 +49,7 @@ const Signup = () => {
     setPasswordError("");
     createUserWithEmailAndPassword(email, password);
     toast("check Your email and verify your account");
-    await updateProfile({ displayName });
+    await updateProfile({ displayName: displayName });
   };
 
   //@@@@@@@

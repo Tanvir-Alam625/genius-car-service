@@ -1,5 +1,6 @@
 // import Route from "react-route/lib/route";
 import { Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import "./App.css";
 import About from "./components/About/About";
 import Footer from "./components/Footer/Footer";
@@ -32,7 +33,7 @@ function App() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
         <Route
-          path="/checkout"
+          path="/checkout/:serviceId"
           element={
             <RequireAuth>
               <Checkout />
@@ -77,6 +78,7 @@ function App() {
 
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
+      <ToastContainer />
       <Footer />
     </div>
   );
