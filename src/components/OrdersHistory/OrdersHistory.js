@@ -1,9 +1,24 @@
-import React from "react";
-
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import auth from "../../firebase.init";
+import { useAuthState } from "react-firebase-hooks/auth";
 const OrdersHistory = () => {
+  const [user] = useAuthState(auth);
+  const [orders, setOrders] = useState([]);
+  useEffect(() => {
+    const ordersHistory = async () => {
+      const email = user.email;
+      const url = `http://localhost:5000/orders?email=${email}`;
+      await axios.get(url).then((response) => {
+        const { data } = response;
+        setOrders(data);
+      });
+    };
+    ordersHistory();
+  }, [user]);
   return (
     <div className="min-h-screen">
-      <h2>order history</h2>
+      <h2>order history{orders.length}</h2>
     </div>
   );
 };

@@ -1,3 +1,4 @@
+import axios from "axios";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import React, { useState } from "react";
 import {
@@ -27,21 +28,22 @@ const Login = () => {
 
   //navigate
   if (user || userGoogle) {
-    navigate(from, { replace: true });
+    // navigate(from, { replace: true });
   }
   // form submit function handler
-  const handleSubmitFunction = (event) => {
+  const handleSubmitFunction = async (event) => {
     event.preventDefault();
-    // const email = emailRef.current.value;
-    // const password = passwordRef.current.value;
     const email = event.target.email.value;
     const password = event.target.password.value;
-    console.log(email, password);
     if (error) {
       setMyError(error.message);
       return;
     }
-    signInWithEmailAndPassword(email, password);
+    await signInWithEmailAndPassword(email, password);
+    const { data } = await axios.post("http://localhost:5000/getToken", {
+      email: email,
+    });
+    console.log(data);
   };
   //@@@@@@@
   // jsx
