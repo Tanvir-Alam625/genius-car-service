@@ -40,7 +40,7 @@ const Login = () => {
       return;
     }
     await signInWithEmailAndPassword(email, password);
-    const { data } = await axios.post("http://localhost:5000/getToken", {
+    const { data } = await axios.post("https://genius-car-service-625.onrender.com/getToken", {
       email: email,
     });
     console.log(data);

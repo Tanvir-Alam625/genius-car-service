@@ -20,7 +20,7 @@ const Checkout = () => {
       address: event.target.address.value,
       phone: event.target.phone.value,
     };
-    axios.post("http://localhost:5000/order", order).then((response) => {
+    axios.post("https://genius-car-service-625.onrender.com/order", order).then((response) => {
       const { data } = response;
       if (data.insertedId) {
         toast("Thank You Your Order booked...!❤");

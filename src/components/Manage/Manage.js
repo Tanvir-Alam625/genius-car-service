@@ -10,7 +10,7 @@ const Manage = () => {
   const handleDeleteBtn = (id) => {
     const Proceed = window.confirm("Are Your Sure.?");
     if (Proceed) {
-      const url = `http://localhost:5000/service/${id}`;
+      const url = `https://genius-car-service-625.onrender.com/service/${id}`;
       fetch(url, {
         method: "DELETE",
       })

@@ -8,7 +8,7 @@ const OrdersHistory = () => {
   useEffect(() => {
     const ordersHistory = async () => {
       const email = user.email;
-      const url = `http://localhost:5000/orders?email=${email}`;
+      const url = `https://genius-car-service-625.onrender.com/orders?email=${email}`;
       await axios.get(url).then((response) => {
         const { data } = response;
         setOrders(data);

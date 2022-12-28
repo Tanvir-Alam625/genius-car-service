@@ -6,7 +6,7 @@ const AddService = () => {
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
     console.log(data);
-    const url = "http://localhost:5000/service";
+    const url = "https://genius-car-service-625.onrender.com/service";
     fetch(url, {
       method: "POST",
       headers: {

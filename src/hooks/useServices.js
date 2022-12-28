@@ -4,7 +4,7 @@ const useServices = () => {
   const [services, setServices] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/service")
+    fetch("https://genius-car-service-625.onrender.com/service")
       .then((res) => res.json())
       .then((data) => {
         setServices(data);
